@@ -1,0 +1,108 @@
+<%- include('partials/header', {css_file: 'account'}); %>  
+
+	<section>
+		<div class="container">
+			<div class="row mt-5">
+				<div class="col-4">
+					<img src="<%= data.picture %>" id="img" alt="" referrerpolicy="no-referrer" height="200" width="auto">
+				</div>
+				<div class="col">
+					<h2 id="topic" class="mt-4">
+						ユーザー名前：<%= data.username %><br>
+						<%= data.class %>学生<br>
+						メール：<%= data.email %><br>
+					</h2>
+				</div>
+			</div>
+			<div class="input_area mt-5">
+				<form id="form" method="post">
+					<div class="row">
+						<div class="col">
+							<div class="upload_line">
+								<label class="form-label">Line: </label>
+								<input type="text" name="contact" value="<%= data.contact %>" placeholder="連絡先" required="" class="form-control"><br />
+							</div>
+							<div class="upload_img">
+								<label class="form-label">写真: &nbsp;</label>
+								<input type="file" id="file"><br>
+							</div>
+							<div class="upload_url">
+								<input type="text" id="imagelink" value="<%= data.picture %>" name="image" placeholder="写真"　required="" class="form-control"><br>
+							</div>
+						</div>
+						<div class="col">
+							<div class="upload_message">
+								<label class="form-label">購入者への伝言: </label>
+								<textarea type="text" name="description" value="<%= data.description %>" placeholder="購入者への伝言" required="" class="form-control ta"></textarea><br />
+							</div>
+							<input type="submit" value="アプロード" class="btn btn-danger upload">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="mssg bg-danger">
+				<span id="check"></span>
+			</div>
+		</div>
+	</section>
+	
+	<div id="LangTable"><a href="/account" id="aa"></a></div>
+	<div id="LangTable"><a href="/" id="loginplease"></a></div>
+
+	<%- include('partials/footer'); %>  
+<script>
+	$(document).ready(function () {
+
+		$("#form").submit(function (event) {
+			event.preventDefault();
+
+			$.ajax({
+				type: 'POST',
+				url: '/account',
+				data: $('#form').serialize(),
+				dataType: "json",
+				success: function (response) {
+					//alert("a");
+					//console.log(response.Success);
+					$('#form')[0].reset();
+
+					document.getElementById("check").innerHTML = response.Success;
+					//ADD THIS CODE
+					setTimeout(function () {
+						document.getElementById("check").innerHTML = "";
+					}, 3000);
+					if (response.Success == "Posted") {
+						document.getElementById("aa").click();
+					} else {
+						document.getElementById("loginplease").click();
+					}
+				},
+				error: function () {
+				}
+			})
+		});
+
+	});
+
+	const file = document.getElementById("file")
+	const img = document.getElementById("img")
+
+	file.addEventListener("change", ev => {
+		const formdata = new FormData()
+		formdata.append("image", ev.target.files[0])
+		fetch("https://api.imgur.com/3/image/", {
+			method: "post",
+			headers: {
+				Authorization: "Client-ID 97f5d5962f28fe9"
+			},
+			body: formdata
+		}).then(data => data.json()).then(data => {
+			img.src = data.data.link
+
+			document.getElementById("imagelink").value = data.data.link
+			console.log(data.data.link)
+		})
+	})
+
+	
+</script>

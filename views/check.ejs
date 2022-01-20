@@ -1,0 +1,19 @@
+<%- include('partials/header', {css_file: 'cart'}); %>  
+
+  <div class='container'>
+    
+    <div id="topic">カート</div>
+    <div id='book_detail' class="show-cart" style='visibility:visible;'>
+
+    </div>
+  </div>
+
+
+<script>
+  var data = JSON.parse('<%- JSON.stringify(bookData)%>')
+  var stardata = JSON.parse('<%- JSON.stringify(starData)%>')
+</script>
+<script src="./js/check.js"></script>
+
+
+<%- include('partials/footer'); %>  

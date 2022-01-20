@@ -1,0 +1,46 @@
+
+
+.info-show{
+    padding: 40px;
+}
+
+.review{
+    margin-top: 30px;
+    margin-bottom: 15px;
+    line-height: 40px;
+}
+
+.canv_area{
+    position: relative;
+}
+
+.shape{
+  position: absolute;
+  top: 2%;
+  left: 10%;
+  /* transform: translate(-5%, -50%); */
+  padding: 60px;
+  border: #222 solid 5px;
+  border-radius: 120%;
+}
+
+.under_area1, .under_area2{
+    margin-top: 60px;
+}
+
+.under_title{
+    margin-bottom: 15px;  
+}
+
+hr{
+    margin-top: 20px;
+}
+
+a{
+  text-decoration:none;
+}
+
+.books, .links{
+  left: 3%;
+  position: relative;
+}

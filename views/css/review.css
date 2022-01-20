@@ -1,0 +1,30 @@
+#topic{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 40px;
+    margin-bottom: 25px;
+  }
+  
+  
+.ta{
+    height: 320px;
+  }
+
+.form-control {
+    background-color: black;
+    border-color: gray;
+    color: white;
+}
+
+.star{
+    position: relative;
+}
+
+.upload{
+    margin-top: 15px;
+    float: right;
+}
+
+.form-label{
+  font-size: 34px;
+}

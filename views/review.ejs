@@ -1,0 +1,88 @@
+
+<link rel="stylesheet" type="text/css" href="./css/star.css">
+<%- include('partials/header', {css_file: 'review'}); %>  	
+    <section>
+        <div class="container">
+            <h2 id="topic">
+                コメント
+            </h2>
+            <br>
+            <form id="form" class="rating" method="post">
+                <div class="star_area">
+
+                    <div class="form-label"><%=username%>さんを評価してください。</div>
+                    <div class="star mb-3">
+                        <span><input type="radio" name="stars" id="str1" value="1"><label for="str1"></label></span>
+                        <span><input type="radio" name="stars" id="str2" value="2"><label for="str2"></label></span>
+                        <span><input type="radio" name="stars" id="str3" value="3"><label for="str3"></label></span>
+                        <span><input type="radio" name="stars" id="str4" value="4"><label for="str4"></label></span>
+                        <span><input type="radio" name="stars" id="str5" value="5"><label for="str5"></label></span>
+                    </div>
+
+                    <textarea type="text" name="comment" placeholder="コメント" required=""
+                        class="form-control ta"></textarea>
+                    <input type="hidden" name="username" required="" value="<%=username%>" class="form-control">
+                    <input type="submit" value="アプロード" class="btn btn-danger upload">
+
+                </div>
+            </form>
+        </div>
+        <div id="LangTable"><a href="/user" id="aa"></a></div>
+    </section>
+    <div class="mssg">
+        <span id="check"></span>
+    </div>
+
+<%- include('partials/footer'); %>  
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#form").submit(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/review',
+                data: $('#form').serialize(),
+                dataType: "json",
+                success: function (response) {
+                    //alert("a");
+                    //console.log(response.Success);
+                    $('#form')[0].reset();
+
+                    document.getElementById("check").innerHTML = response.Success;
+                    //ADD THIS CODE
+                    setTimeout(function () {
+                        document.getElementById("check").innerHTML = "";
+                    }, 3000);
+                    if (response.Success == "Posted") {
+                        document.getElementById("aa").click();
+                    };
+                },
+                error: function () {
+                }
+            })
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Check Radio-box
+        $(".star input:radio").attr("checked", false);
+
+        $('.star input').click(function () {
+            $(".star span").removeClass('checked');
+            $(this).parent().addClass('checked');
+        });
+
+        $('input:radio').change(
+            function () {
+                var userRating = this.value;
+                alert(userRating+"点");
+            });
+    });
+    $(':radio').change(function () {
+        console.log('New star rating: ' + this.value);
+    });
+</script>

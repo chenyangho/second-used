@@ -1,0 +1,112 @@
+
+<%- include('partials/header', {css_file: 'game'}); %>  
+<!-- <div class="cart_area">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart">Cart(<span class="total-count" id="number"></span>)</button>
+  <br>
+  <button class="clear-cart btn btn-danger">Clear Cart</button>
+</div>
+
+<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="show-cart table">
+
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary order-books">Order now</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+  
+<section class="st">
+  <div class="container">
+    
+    <div class="say_hello">
+      <div class="row">
+        <div class="col">
+          <p class='name_area'>お帰りなさい、<a href="/user <%= data.unique_id %>"><%= data.class %>クラスの<%= data.username %>さん！</a></p>
+        </div>
+        <div class="col">
+          <p class='reminder_area'><a href="/reminder">お知らせ：<%= reminder.length %>件</p></a>
+        </div>
+      </div>
+    </div>
+
+    <div id="app"></div>
+
+    <div id="book_detail">
+    <div class="row">
+        <div class="col">
+          <div id="d_left">
+            <img id='img1'
+              src=""
+              alt="Grapefruit"
+              referrerpolicy="no-referrer">
+          </div>
+        </div>
+        <div class="col-6">
+          <div id="d_middle">
+            <p>Name : <span id="name"></span></p>
+            <p>Owner : <span id="owner"></span></p>
+            <p>Price : <span id="price"></span></p>
+            <p>Sold : <span id="sold"></span></p>
+          </div>
+        </div>
+        <div class='col'>
+          <div class='d_right'>
+            <p class='seller'>出品者</p>
+            <hr class='hr1'>
+            <p id='seller_name' class='seller_name'>Name</p>
+            <p class='stars'></p>
+            
+            <a href="#" data-uniID="books_uni_number" data-npcid="npc-id" class="add-to-cart btn btn-danger buy-button" id="add-btn">カードに入れる</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="input">
+      <div class="input_area">
+        <label for="site-search">本を検索する:</label>
+        <input type="search" id="site_search" name="q" aria-label="Search through site content">
+        <button class="btn btn-primary" onclick="search_book()">検索</button>
+      </div>
+      <div id="test"></div>
+      <a id="iteam_url" href="">Click here!</a>
+      <div id="search_book">
+        <div id="s_d_left">
+          <img id='img2'
+            src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/assortment-of-colorful-ripe-tropical-fruits-top-royalty-free-image-995518546-1564092355.jpg"
+            alt="Grapefruit"
+            referrerpolicy="no-referrer">
+        </div>
+        <div id="s_d_right">
+          <p>Name : <span id="name2"></span></p>
+          <p>Owner : <span id="owner2"></span></p>
+          <p>Price : <span id="price2"></span></p>
+          <p>Sold : <span id="sold2"></span></p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <%- include('partials/footer'); %>  
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.22.0/dist/phaser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="./js/game_phase.js"></script>
+  <script src="./js/cart_api.js"></script>
+  <script>
+    //----------------------導入資料from index.js-----------------------//
+    var data = JSON.parse('<%- JSON.stringify(bookData)%>')
+  </script>

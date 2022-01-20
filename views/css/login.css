@@ -1,0 +1,92 @@
+body{
+  overflow: hidden;
+}
+
+#text{
+    color: #fff;
+    font-size: 40px;
+}
+
+.st1{
+  transition: 0.3s;
+  padding: 200px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.link{
+  width: 130px;
+  margin-top: 25px;
+  font-weight: bold;
+  border-radius: 20px;
+  background-color: #e3170d;
+  border: 1px  solid #292421;
+  color: black;
+  box-shadow: 0px 0px 5px rgba(128,128,105,0.5);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.link:hover{
+    background-color: #aa3b35;
+    color: white;
+}
+
+.st2{
+  transition: 0.5s;
+  opacity: 0;
+  transform: translate(0%, 120%);
+  padding: 200px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.st2 a{
+  text-decoration: none;
+  color: #fff;
+  border-radius: 20px;
+  line-height: 40px;
+  letter-spacing: 1px;
+}
+
+.st2 a:hover{
+  color: #192d2e;
+}
+
+.login_title{
+  margin-bottom: 25px;
+  color: white;
+}
+
+.link2{
+  background-color: #e3170d;
+  color: black;
+  width: 300px;
+}
+
+.form-group{
+  padding: 20px;
+}
+
+
+.form-control{
+    width: 350px;
+    height: 35px;
+    border-radius: 15px;
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%);
+    transition: 0.4s;
+    box-shadow: 0px 0px 15px rgba(0,122,250,0.3);
+}
+
+.form-control:focus{
+    width: 500px;
+}
+
+.msg{
+  color: #e3170d;
+}
+

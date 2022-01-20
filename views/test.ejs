@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form" ).submit(function(event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/test',
+					data: $('#form').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form')[0].reset();
+
+						document.getElementById("check").innerHTML=response.Success;
+         					//ADD THIS CODE
+         					setTimeout(function(){
+         						document.getElementById("check").innerHTML="";
+         					},3000);
+         					if (response.Success=="Posted") {
+         						document.getElementById("aa").click();
+         					};
+         				},
+         				error: function() {
+         				}
+         			})
+			});
+
+		});
+	</script> -->
+    <meta charset="UTF-8">
+    <title>Imgur</title>
+</head>
+
+<body>
+    
+    <!-- <img src= "https://i.imgur.com/NazPqbZ.jpeg" id="img" alt="" referrerpolicy="no-referrer" height="200" width="auto">
+    <br>
+    <input type="file" id="file">
+    <br>
+    <strong>
+        <p id="url"></p>
+    </strong>
+    <form id="form" method="post" >
+      <input type="text" id="imagelink" name="image"  required="" class="form-control">
+    <input type="submit" value="アプロード" class="btn btn-success">
+    </form>
+    <script>
+        const file = document.getElementById("file")
+        const img = document.getElementById("img")
+        const url = document.getElementById("url")
+        
+        file.addEventListener("change", ev => {
+            const formdata = new FormData()
+            formdata.append("image", ev.target.files[0])
+            fetch("https://api.imgur.com/3/image/", {
+                method: "post",
+                headers: {
+                    Authorization: "Client-ID 97f5d5962f28fe9"
+                },
+                body: formdata
+            }).then(data => data.json()).then(data => {
+                img.src = data.data.link
+                url.innerText = data.data.link
+                document.getElementById("imagelink").value = data.data.link
+            })
+        })
+    </script> -->
+
+</body>
+</html>

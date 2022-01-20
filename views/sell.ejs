@@ -1,0 +1,127 @@
+	  
+<%- include('partials/header', {css_file: 'sell'}); %>  
+	
+	<section class="st1">
+		<div  class="container">
+			<div id="topic">出品する参考書</div>
+			
+			<div class="info-form">
+					<form id="form" method="post">
+						<div class="row">
+							<div class="col-7 left">
+
+								<label class="form-label">カテゴリー</label>
+								<select id="genre" name="genre" class="form-select class_select">
+									<option value="1">IT Passport</option>
+									<option value="2">基本情報技術者試験</option>
+									<option value="3">応用情報技術者試験</option>
+									<option value="4">情報セキュリティスペシャリスト</option>
+									<!-- <option value="5">ネットワークスペシャリスト</option> -->
+									<!-- <option value="6">データベーススペシャリスト</option> -->
+									<option value="5">システムアーキテクト</option>
+									<option value="6">AWS認定資格</option>
+									<!-- <option value="9">オラクルマスター</option> -->
+									<option value="7">オラクルJava認定資格</option>
+									<option value="8">シスコ技術者認定資格</option>
+									<option value="9">マイクロソフト認定資格</option>
+									<option value="10">その他</option>
+								</select><br />
+								
+								<label class="form-label">書名</label>
+								<input type="text" name="bookname" placeholder="書名" required="" class="form-control"><br />
+								
+								<label class="form-label">値段</label>
+								<input type="number" name="price" placeholder="¥" required="" class="form-control"><br />
+							
+								<label class="form-label">本の説明、本の状態</label>
+								<textarea type="text" name="description" placeholder="本の説明、本の状態" required="" class="form-control ta"></textarea><br />
+
+								
+							</div>
+							<div class="col right">
+								<label class="form-label">出品写真</label><br>
+								<div>
+									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN1TGr0Bwd6nXnjZovSU9viT1UlpGClD1R2g&usqp=CAU" id="img" alt="" referrerpolicy="no-referrer" height="200" width="auto"><br>
+								</div>
+								<div class="mt-3">
+									<input class="form-control-lg input_photo" type="file" id="file">
+								</div>
+								<input type="text" id="imagelink" name="image" required="" class="form-control photo"><br>
+								
+								<div class="btn_area">
+									<input type="submit" value="アプロード" class="btn btn-danger upload">
+								</div>
+							</div>
+						</div>
+					</form>
+			</div>
+			<div class="mssg bg-danger">
+				<span id="check"></span>
+			</div>
+			<div id="LangTable">
+				<a href="/selling" id="aa"></a>
+			</div>
+			<div id="LangTable">
+				<a href="/" id="loginplease"></a>
+			</div>
+		</div>
+	</section>
+
+
+<%- include('partials/footer'); %>  
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		$("#form").submit(function (event) {
+			event.preventDefault();
+
+			$.ajax({
+				type: 'POST',
+				url: '/sell',
+				data: $('#form').serialize(),
+				dataType: "json",
+				success: function (response) {
+					//alert("a");
+					//console.log(response.Success);
+					$('#form')[0].reset();
+
+					document.getElementById("check").innerHTML = response.Success;
+					//ADD THIS CODE
+					setTimeout(function () {
+						document.getElementById("check").innerHTML = "";
+					}, 3000);
+					if (response.Success == "Posted") {
+						document.getElementById("aa").click();
+					} else {
+						document.getElementById("loginplease").click();
+					}
+				},
+				error: function () {
+				}
+			})
+		});
+
+	});
+</script>
+<script>
+	const file = document.getElementById("file")
+	const img = document.getElementById("img")
+
+
+	file.addEventListener("change", ev => {
+		const formdata = new FormData()
+		formdata.append("image", ev.target.files[0])
+		fetch("https://api.imgur.com/3/image/", {
+			method: "post",
+			headers: {
+				Authorization: "Client-ID 97f5d5962f28fe9"
+			},
+			body: formdata
+		}).then(data => data.json()).then(data => {
+			img.src = data.data.link
+
+			document.getElementById("imagelink").value = data.data.link
+		})
+	})
+</script>

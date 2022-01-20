@@ -1,0 +1,43 @@
+
+img{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container{
+    padding: 35px;
+}
+
+#topic{
+    line-height: 40px;
+}
+
+label {
+    font-size: 24px;
+    color: white;
+}
+
+.class_select {
+    color: gray;
+    height: 60px;
+    border-color: gray;
+    background-color: black;
+}
+
+.form-control {
+    height: 60px;
+    background-color: black;
+    border-color: gray;
+    color: white;
+}
+
+  
+.ta{
+    height: 175px;
+}
+
+.upload{
+    float: right;
+}

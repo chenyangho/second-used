@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ログイン</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="./css/h_f_import.css">
+	<link rel="stylesheet" type="text/css" href="./css/login.css">
+	  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+	  
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form" ).submit(function(event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/login',
+					data: $('#form').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form')[0].reset();
+
+						document.getElementById("check").innerHTML=response.Success;
+         					//ADD THIS CODE
+         					setTimeout(function(){
+         						document.getElementById("check").innerHTML="";
+         					},3000);
+         					if (response.Success=="Success!") {
+								// -------新增--------
+								sessionStorage.clear();
+								// -------------------
+         						document.getElementById("aa").click();
+         					};
+         				},
+         				error: function() {
+         				}
+         			})
+			});
+
+		});
+	</script>
+</head>
+<body>
+	<header>
+		<a href="/game" class="logo">ECC中古参考書マーケット</a>
+		<ul class="header_fucking_freak_thing">
+			<li class="li_in_header"><a href="/login" class="active">ログイン</a></li>
+			<li class="li_in_header"><a href="/">会員登録</a></li>
+		</ul>
+	</header>
+	  
+	<section class='st1'>
+	<h2 id="text">
+		ECC中古参考書マーケット
+	</h2>
+	<button class='btn link' id='btn0'>ログイン</button>
+	</section>
+	
+	<section class="st2">
+		<div>
+			<div class='login_title'>
+			<h2>ログイン</h2>
+			</div>
+			<div class="form-group">
+			<form id="form" method="post">
+				<input type="text" name="email" placeholder="メール" required="" class="form-control"><br /><br />
+				<input type="password" name="password" placeholder="パスワード" required="" class="form-control"><br /><br />
+				<input type="submit" value="ログイン" class="btn link link2">
+			</form>
+			</div>
+			<div class="msg">
+			<span id="check"></span>
+			</div>
+			<div id="LangTable"><a href="/game" id="aa"></a>
+			</div>
+			<div class='a_area'>
+			<a href="/forgetpass">パスワード忘れた方  ></a></div>
+			<a href="/">新しいユーザー登録  ></a>
+			</div>
+			</section>
+		
+		</div>
+	</section>
+	
+	<script>
+		$("#btn0").click(
+		function(){
+			$(".st1").css("transform", "translateY(-15%)");
+			$(".st1").css("opacity",0);
+			$(".btn0").css("cursor", "default");
+			$(".st2").css("opacity",1);
+			$(".st2").css("transform", "translate(0%, -87%)");
+		}
+		)
+    </script>
+</body>
+</html>

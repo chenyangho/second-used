@@ -1,0 +1,136 @@
+* {
+  /*  overflow: hidden; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+body {
+  height: 100%; 
+  /* min-height: 100vh; */
+  color: white;
+  background-color: black;
+}
+header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+
+  border-bottom: 1px solid #696969;
+}
+header .logo {
+  color: #fff;
+  font-weight: none;
+  font-size: 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+header .header_fucking_freak_thing {
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .header_fucking_freak_thing .li_in_header {
+  list-style: none;
+  /* width: 120px; */
+  margin-right: 20px;
+}
+header .header_fucking_freak_thing .li_in_header a {
+  text-decoration: none;
+  padding: 6px 15px;
+  color: #fff;
+  border-radius: 20px;
+} 
+
+header .header_fucking_freak_thing .li_in_header a:hover,
+header .header_fucking_freak_thing .li_in_header a.active {
+  background: #fff;
+  color: #2b1055;
+}
+
+.others{
+  border-radius: 20px;
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10000;
+
+  border-top: 1px solid #696969;
+}
+
+.wrap {
+  min-height: 100%;
+ }
+.container{
+  /* overflow: auto; */
+  padding-bottom: 80px;
+}
+section {
+  padding-bottom: 100px;
+}
+
+footer{
+  position: relative;
+  /* margin-top: -80px;*/  /*negative value of footer height */
+  height: 80px;
+  clear:both;
+}
+
+.mssg{
+  font-size: 30px;
+  position: absolute;
+  color: #e3170d;
+  right: 0;
+  bottom: 0;
+}
+
+.dropdown{
+  margin-left: 20px
+}
+
+ 
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#number{
+  color: red;
+}
+  
+
+/*   ------------------------------這之前是header&footer不要動------------------------------   */
+  

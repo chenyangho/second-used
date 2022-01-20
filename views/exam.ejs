@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>試験情報</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" href="./css/teststyle.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+</head>
+
+<body>
+
+	<header>
+		<a href="/game" class="logo">ECC中古参考書マーケット</a>
+		<ul>
+			<li><a href="/profile" class="active">ホーム</a></li>
+			<li><a href="/about">について</a></li>
+			<li><a href="/info">投稿</a></li>
+			<li><a href="/exam">試験</a></li>
+			<li><a href="/selling">売っている</a></li>
+			<li><a href="/sell">売りたい</a></li>
+			<li><a href="/connect">連絡</a></li>
+			<li><a href="/logout">ログアウト</a></li>
+		</ul>
+	</header>
+
+	<br>
+	<div class="info-show">
+		<h2 id="topic">
+			試験情報
+		</h2>
+		<br>
+
+		<%for (const oneexam of exams) {%>
+			<div class="row">
+				<h2 id="topic">
+					<%= oneexam.unique_id %>.<%= oneexam.name %>
+				</h2>
+			</div>
+			<div class="container">
+				<h4 id="review">
+					<div class="row">
+
+						<div class="col-md-5">
+							<img src="<%= oneexam.picture%>" alt=""></img>
+						</div>
+
+						<div class="col-md-3">
+							受験料：<%= oneexam.price %>円<br>
+								難易度：<%= oneexam.difficulty %><br>合格率：<%= oneexam.pass_rate %><br>
+										必要な時間：<%= oneexam.time_need%><br>コスパ：<%= oneexam.return_rate %><br>
+												値段: <%= oneexam.valuable%>
+						</div>
+						<div class="col-md-4">
+							<div class="canvas-container" width="40" height="40">
+								<canvas id="<%= oneexam.unique_id%>"></canvas>
+							</div>
+						</div>
+					</div>
+				</h4>
+			</div>
+
+			<script>
+				var ctx = document.getElementById('<%= oneexam.unique_id%>');
+				var data = {
+					labels: [
+						'難易度',
+						'合格率',
+						'必要な時間',
+						'コスパ',
+						'値段'
+					],
+					datasets: [
+						{
+							label: '<%= oneexam.name %>',
+							data: ["<%= oneexam.difficulty%>", "<%= oneexam.pass_rate%>", "<%= oneexam.time_need%>", "<%= oneexam.return_rate%>", "<%= oneexam.valuable%>"],
+							fill: true,
+							backgroundColor: 'rgba(255, 34, 132,0.75)',
+							borderColor: 'rgb(255, 99, 132)',
+							pointBackgroundColor: 'rgb(255, 99, 132)',
+							pointBorderColor: '#fff',
+							pointHoverBackgroundColor: '#fff',
+							pointHoverBorderColor: 'rgb(255, 99, 132)',
+
+						},
+						{
+							label: '',
+							data: [0, 0, 0, 0, 5],
+							fill: true,
+							backgroundColor: 'rgba(54, 162, 235, 0)',
+							borderColor: 'rgb(54, 162, 235,0)',
+							pointBackgroundColor: 'rgb(54, 162, 235,0)',
+							pointBorderColor: '#fff',
+							pointHoverBackgroundColor: '#fff',
+							pointHoverBorderColor: 'rgb(54, 162, 235,0)',
+
+						}
+					]
+				};
+				// </block:setup>
+
+				// <block:config:0>
+				var config = {
+					type: 'radar',
+					data: data,
+					options: {
+
+						plugins: {  // 'legend' now within object 'plugins {}'
+							legend: {
+								labels: {
+									color: "white",  // not 'fontColor:' anymore
+									// fontSize: 18  // not 'fontSize:' anymore
+									font: {
+										color: "white",
+										size: 20 // 'size' now within object 'font {}'
+									},
+								},
+							}
+						},
+						responsive: false,
+						maintainAspectRatio: true,
+						elements: {
+							line: {
+								borderWidth: 3
+							}
+						},
+						scales: {
+							r: {
+								pointLabels: {
+									color: 'white',
+									font: 1
+
+								}
+							}
+
+						}
+					},
+				};
+				// </block:config>
+
+
+				var chart_<%= oneexam.unique_id %> = new Chart(
+					ctx,
+					config
+				);
+			</script>
+
+			<h4 id="review">
+				<%=oneexam.info%><br>
+					試験時間：<%=oneexam.length%>分<br>
+						試験方式：<%= oneexam.exam_way %><br>
+							合格率：<%= oneexam.pass_percent %>%<br>
+			</h4>
+
+
+			<h4 id="review">受験感想：</h4>
+			<%for (const oneinfo of infos) { if(oneexam.unique_id==oneinfo.exam){%>
+				<h4 id="review"><a href="/onepost<%= oneinfo.unique_id %>">
+						<%= oneinfo.topic %>
+							投稿者：<%= oneinfo.writer %>
+								<%= oneinfo.date %>
+					</a></h4>
+				<% } } %>
+
+					
+			<h4 id="review">関連の本：</h4>
+			<%for (const onebook of books) { if(oneexam.unique_id==onebook.genre){%>
+				
+				<h4 id="review"><%= onebook.bookname %>
+							投稿者：<%= onebook.owner %>
+								値段：<%= onebook.price%>円
+					</h4>
+				<% } } %>
+
+					<% }%>
+
+
+	</div>
+
+
+	<div id="LangTable"><a href="/exam" id="aa"></a>
+	</div>
+
+</body>
+
+</html>

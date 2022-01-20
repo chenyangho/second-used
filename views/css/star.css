@@ -1,0 +1,32 @@
+.star {
+  float:left;
+  width:300px;
+}
+.star span { float:left; position:relative; }
+.star span input {
+  position:absolute;
+  top:0px;
+  left:0px;
+  opacity:0;
+}
+.star span label {
+  display:inline-block;
+  width:30px;
+  height:30px;
+  text-align:center;
+  color:#FFF;
+  background:#ccc;
+  font-size:30px;
+  margin-right:2px;
+  line-height:30px;
+  border-radius:50%;
+  -webkit-border-radius:50%;
+}
+.star span:hover ~ span label,
+/* .star span:hover label, */
+/* .star span.checked label, */
+.star span.checked ~ span label {
+  background: black;
+  color: white;
+  border: 1px solid white;
+}

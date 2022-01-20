@@ -1,0 +1,65 @@
+
+<%- include('partials/header', {css_file: 'onepost'}); %>  
+    <section>
+        <div class="container">
+            <h2 id="topic"  class="mt-5 top">
+                <!-- <%= info.unique_id %>. -->
+                <%= info.exam_name %>合格体験：<%= info.topic %> <br>
+                投稿日時：<%= info.date %><br>
+                作者：
+            <a href="/user <%= info.writer_id %>"><%= info.writer %></a>
+            </h2>
+            <h4 id="review" class="mt-5">
+                <p class="outside">【取得点】</p>
+                <p class="inside"><%= info.points %>点<br><br></p>
+                <p class="outside">【何回目の受験か】</p>
+                <p class="inside"><%= info.exam_count %>回目<br><br></p>
+                <p class="outside">【学習期間】</p>
+                <p class="inside"><%= info.study_period %><br><br></p>
+                <p class="outside">【使用テキスト】</p>
+                <p class="inside"><%= info.used_book %> <br><br></p>
+                <p class="outside">【学習方法】</p>
+                <p class="inside"><%= info.study_style %><br><br></p>
+                <p class="outside">【試験の感想】</p>
+                <p class="inside"><%= info.review %><br><br></p>
+                <p class="outside">【受験者へのアドバイス】</p>
+                <p class="inside"><%= info.advice %><br><br></p>
+                <p class="outside">【次の目標】</p>
+                <p class="inside"><%= info.next_target %><br><br></p>
+            </h4>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#form").submit(function (event) {
+                event.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/info',
+                    data: $('#form').serialize(),
+                    dataType: "json",
+                    success: function (response) {
+                        //alert("a");
+                        //console.log(response.Success);
+                        $('#form')[0].reset();
+
+                        document.getElementById("check").innerHTML = response.Success;
+                        //ADD THIS CODE
+                        setTimeout(function () {
+                            document.getElementById("check").innerHTML = "";
+                        }, 3000);
+                        if (response.Success == "Posted") {
+                            document.getElementById("aa").click();
+                        };
+                    },
+                    error: function () {
+                    }
+                })
+            });
+
+        });
+    </script>
+
+<%- include('partials/footer'); %>  

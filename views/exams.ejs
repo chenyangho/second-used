@@ -1,0 +1,33 @@
+<%- include('partials/header', {css_file: 'exams'}); %>  
+	<br>
+	<section class="info-show">
+	  <div class="container">
+		<h2 id="topic">試験情報</h2>
+		<br>
+		<%for (const oneexam of exam) {%>
+			<% if(oneexam.unique_id%3 == 1){%>
+			<div class="row">
+			<% } %>
+				<div class="col mt-3">
+						<a href="/oneexam<%= oneexam.unique_id %>">
+							<img src="<%= oneexam.picture%>" alt=""></img>
+						</a>
+						<div class="word">
+							<a href="/oneexam<%= oneexam.unique_id %>" class="link-primary">
+								<div>
+									<%= oneexam.unique_id %>.<%= oneexam.name %>
+								</div>
+							</a>
+						</div>
+				</div>
+			<% if(oneexam.unique_id%3 == 0){%>
+				</div>
+			<% } %>
+			<%} %>
+
+	  </div>
+	  <div id="LangTable"><a href="/exam" id="aa"></a></div>
+	</section>
+
+
+<%- include('partials/footer'); %>  

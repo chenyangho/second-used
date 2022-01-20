@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>パスワード忘れ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./css/h_f_import.css">
+    <link rel="stylesheet" type="text/css" href="./css/forget.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form2" ).submit(function(event) {
+
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/forgetpass',
+					data: $('#form2').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form2')[0].reset();
+						//alert("abc");
+						document.getElementById("check").innerHTML=response.Success;
+
+						setTimeout(function(){
+							document.getElementById("check").innerHTML="";
+						},3000);
+						if (response.Success=="Password changed!") {
+							document.getElementById("aa").click();
+						};
+					},
+					error: function() {
+					}
+				})
+			});
+
+		});
+	</script>
+</head>
+<body>
+	<header>
+		<a href="/game" class="logo">ECC中古参考書マーケット</a>
+		<ul class="header_fucking_freak_thing">
+			<li class="li_in_header"><a href="/login">ログイン</a></li>
+			<li class="li_in_header"><a href="/">会員登録</a></li>
+		</ul>
+	</header>
+	<section>
+		<div class="container">
+			<div id="topic">
+				<p>パスワード変更</p>
+			</div>
+			<div class="form-group input_area">
+				<form id="form2" method="post">
+					<div class="row">
+						<div class="col">
+							<label class="form-label">メール</label>
+							<input type="text" name="email" placeholder="メール" required="" class="form-control"><br/>
+						</div>
+
+						<div class="col">
+							<label class="form-label">学生番号</label>
+							<input type="text" name="studentId" placeholder="学生番号" required="" class="form-control"><br/>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col">
+							<label class="form-label">パスワード</label>
+							<input type="password" name="password" placeholder="パスワード" required="" class="form-control"><br/>
+						</div>
+
+						<div class="col">
+							<label class="form-label">パスワード確定</label>
+							<input type="password" name="passwordConf" placeholder="パスワード確定" required="" class="form-control"><br/>
+						</div>
+					</div>
+					<input type="submit" value="変更" class="btn btn-danger btn-lg upload">
+				</div>
+				</form>
+			</div>
+			<div  class="mssg bg-danger">
+				<span id="check"></span>
+				</div>
+				<div id="LangTable"><a href="/profile" id="aa"></a>
+				</div>
+				<!-- <div><span>登録?</span><a href="/login">ここ</a></div> -->
+			</div>
+			<div id="LangTable"><a href="/login" id="aa"></a>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

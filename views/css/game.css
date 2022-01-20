@@ -1,0 +1,140 @@
+
+
+#app{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top: 1%;
+    overflow: hidden;
+}
+
+
+#book_detail{
+  visibility:hidden;
+  /* width: 50%;
+  display: flex; */
+  margin-top: 20px;
+  /* margin-left:20px; */
+}
+
+/* #test{
+  margin-top: 2px;
+  font-size: small;
+  color: crimson;
+} */
+
+/* #d_left{
+  width:auto;
+}
+#d_middle{
+  width:fit-content;
+  margin-left: 10px;
+}
+*/
+.d_right{
+  position: relative;
+  margin-top:30px;
+  height: 100%;
+} 
+  
+.seller{
+  color:#696969;
+}
+
+.seller_name, .stars{
+  text-align:center;
+}
+
+.buy-button{
+  position: absolute;
+  width:70%;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+
+.hr1{
+  border-top: 1px solid #696969;
+  border-bottom: 1px solid #696969;
+}
+
+img{
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+}
+
+#input{
+  visibility: hidden;   /*!!!!!!!!!!!!!!!!!!!!!!!!!!!這邊隱藏!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+  width: 30%;
+  top: 272px;
+  position: absolute;
+  right: 25px;
+  margin-right: 20px;
+}
+
+#img2{
+  margin-top: 20px;
+}
+
+
+#search_book{
+  visibility:hidden;
+  display: flex;
+  top: 10px;
+}
+
+.st{
+  padding-top:20px;
+}
+
+#s_d_right{
+  margin-left: 10px;
+}
+
+#iteam_url{
+  visibility:hidden;
+}
+
+.buy-button{
+  height: 35px;
+  bottom: 0
+}
+
+.cart_area{
+  position: absolute;
+  /* position: relative; */
+  /* top: 10%;
+  right: 0; */
+}
+
+#price{
+  color:red;
+}
+.btn_area{
+  position: relative;
+}
+
+.add-to-cart{
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+}
+
+.delete-item{
+  float: right;
+}
+
+
+p{
+  margin: 2px;
+}
+
+.name_area, .reminder_area{
+  font-size: 18px;
+}
+
+.reminder_area{
+  float: right;
+}

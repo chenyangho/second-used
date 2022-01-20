@@ -1,0 +1,58 @@
+
+<%- include('partials/header', {css_file: 'selling'}); %>  
+	<section>
+		<div class="container">
+			<h2 class="title">
+				保留中の本
+			</h2>
+			<%for (const onebook of book) {%>
+				<div class="row">
+					<div class="col-3">
+						<img src="<%= onebook.picture%>" referrerpolicy='no-referrer' alt=""></img>
+					</div>
+					<div class="col">
+						<div class="book_name">
+							<%= onebook.bookname %>&nbsp; &nbsp; 
+							<span id="status<%= onebook.unique_id %>" class="badge"><%= onebook.sold %></span>
+							<span id="buyer<%= onebook.unique_id %>"></span>
+						</div>
+						<span class="price">¥ <%= onebook.price %></span><span class="zei">(税込)</span>
+						<div class="detail">
+							<h4>商品の説明</h4>
+							<h4 id="review">
+								売者： <%= onebook.owner %><br>
+								分類：<%= onebook.genre %><br>
+								<%=onebook.description%>
+							</h4>
+						</div>
+						<div class="btn_area">
+							<a href="/chat<%= onebook.owner %>"><button class="btn btn-danger btn-lg">販売者チャット</button></a>
+                            <a href="/finish<%= onebook.unique_id %>"><button class="btn btn-primary btn-lg">やり取り完成</button></a>
+						</div>
+
+						<script>
+							
+							// var selling = classVal.concat("bg-primary");
+							// var sold = classVal.concat("bg-success");
+							// var reserve = classVal.concat("bg-secondary");
+							if ("<%=onebook.sold%>" == 0){
+								document.getElementById("status<%= onebook.unique_id %>").innerHTML = "発売中";
+								document.getElementById("status<%= onebook.unique_id %>").classList.add("bg-primary");
+							}else if ("<%=onebook.sold%>" == 1){
+								document.getElementById("status<%= onebook.unique_id %>").innerHTML = "保留中";
+								document.getElementById("status<%= onebook.unique_id %>").classList.add("bg-secondary");
+								document.getElementById("buyer<%= onebook.unique_id %>").innerHTML = "(<%= onebook.buyer%>)";
+							}else if ("<%=onebook.sold%>" == 2){
+								document.getElementById("status<%= onebook.unique_id %>").innerHTML = "SOLD";
+								document.getElementById("status<%= onebook.unique_id %>").classList.add("bg-success");
+							}
+						</script>
+					</div>
+				</div>
+				<hr>
+			<% }%>
+		</div>
+	</section>
+
+	
+<%- include('partials/footer'); %>  

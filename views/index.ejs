@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>新規登録</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="./css/h_f_import.css">
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+	  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+	  
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$("#form1").submit(function (event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/',
+					data: $('#form1').serialize(),
+					dataType: "json",
+					success: function (response) {
+						//alert("a");
+						//console.log(response.Success);
+						$('#form1')[0].reset();
+
+						document.getElementById("check").innerHTML = response.Success;
+						//ADD THIS CODE
+						setTimeout(function () {
+							document.getElementById("check").innerHTML = "";
+						}, 3000);
+						if (response.Success == "You are regestered,You can login now.") {
+							document.getElementById("aa").click();
+						};
+					},
+					error: function () {
+					}
+				})
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<header>
+		<a href="/game" class="logo">ECC中古参考書マーケット</a>
+		<ul class="header_fucking_freak_thing">
+			<li class="li_in_header"><a href="/login">ログイン</a></li>
+			<li class="li_in_header"><a href="/" class="active">会員登録</a></li>
+		</ul>
+	</header>
+
+	<section>
+		<div class="container st1">
+			<div class="form-group">
+				<form id="form1" method="post">
+					<div class="row mb-3 mt-5">
+						<div class="col">
+							<div class="select_class">
+								<label class="form-label">クラス</label>
+								<select name="select" class="form-select class_select">
+									<option value="AI">選択してください。</option>
+									<option value="AI">AI</option>
+									<option value="BN">BN</option>
+									<option value="BS">BS</option>
+									<option value="CG">CG</option>
+									<option value="GC">GC</option>
+									<option value="GI">GI</option>
+									<option value="GN">GN</option>
+									<option value="GO">GO</option>
+									<option value="GR">GR</option>
+									<option value="IE">IE</option>
+									<option value="IN">IN</option>
+									<option value="NK">NK</option>
+									<option value="SE">SE</option>
+									<option value="SK">SK</option>
+									<option value="WD">WD</option>
+									<option value="WE">WE</option>
+								</select>
+							</div>
+						</div>
+						<div class="col">
+							<div class="std_ID">
+								<label class="form-label">学生番号</label>
+								<input name="studentId" placeholder="学生番号" class="form-control" required=""><br />
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row mb-3">
+						<div class="col">
+							<div class="email">
+								<label class="form-label">メールアドレス</label>
+								<input type="email" name="email" class="form-control" placeholder="メール"
+									required=""><br />
+							</div>
+						</div>
+						<div class="col mb-3">
+							<div class="username">
+								<label class="form-label">ユーザー名</label>
+								<input type="text" name="username" class="form-control" placeholder="ユーザー名"
+									required=""><br />
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col">
+							<div class="pd">
+								<label class="form-label">パスワード</label>
+								<input type="password" name="password" class="form-control" placeholder="パスワード"
+									required=""><br />
+							</div>
+						</div>
+						<div class="col">
+							<div>
+								<label class="form-label">再パスワード</label>
+								<input type="password" name="passwordConf" class="form-control" placeholder="パスワード確認"
+									required=""><br />
+							</div>
+						</div>
+					</div>
+					<div>
+						<input type="submit" value="新規登録" class="btn btn-lg mt-3">
+					</div>
+				</form>
+			</div>
+			<br>
+			      
+			<br>
+			<div class="mssg bg-danger">
+				<span id="check"></span>
+			</div>
+			<!-- <div id="msg">
+				<span>ユーザー登録</span><a href="/login">ここにクリック</a></span>
+			</div>  -->
+		
+		</div>
+	</section>
+	<footer>
+		<div>
+			<p>footer</p>
+		</div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>サイトについて</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./css/h_f_import.css">
+	<link rel="stylesheet" type="text/css" href="./css/<%= css_file %>.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header>
+    <a href="/game" class="logo">ECC中古参考書マーケット</a>
+    <ul class="header_fucking_freak_thing">
+      <li class="li_in_header"><a href="/game">ホーム</a></li>
+      <li class="li_in_header"><a href="/exams">試験</a></li>
+      <li class="li_in_header"><a href="/account">アカウント</a></li>
+      <li class="li_in_header"><a href="/check">カート ( <span class="total-count" id="number"></span> )</a></li>
+      <li class="li_in_header"><a href="/sell" class="btn-danger btn">出品</a></li>
+      <div class="dropdown ">
+        <button class="btn btn-secondary dropdown-toggle others" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+          その他
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+          <li><a href="/about" class="dropdown-item">について</a></li>
+          <li><a href="/info" class="dropdown-item">投稿</a></li>
+          <li><a href="/waiting_list" class="dropdown-item">保留中の本</a></li>
+          <li><a href="/selling" class="dropdown-item">販売中の参考書</a></li>
+          <li><a href="/connect" class="dropdown-item">連絡</a></li>
+          <li><a href="/logout" class="dropdown-item">ログアウト</a></li>
+        </ul>
+      </div>
+    </ul>
+  </header>
+  <div class='wrap'>

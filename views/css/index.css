@@ -1,0 +1,40 @@
+
+
+.st1{
+  padding: 80px;
+}
+
+label{
+  font-size: 30px;
+  color: white;
+}
+
+.class_select{
+  color: gray;
+  height: 60px;
+  border-color: gray;
+  background-color: black;
+}
+
+.form-control{
+  height: 60px;
+  background-color: black;
+  border-color: gray;
+  color: white;
+}
+
+#msg{
+  float: right;
+}
+
+.btn{
+  background-color: #e3170d;
+  color: black;
+  float: right;
+}
+
+.btn:hover{
+  background-color: #aa3b35;
+  color: white;
+}
+    

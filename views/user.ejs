@@ -1,0 +1,87 @@
+
+<%- include('partials/header', {css_file: 'user'}); %>  	
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="<%= user.picture %>" id="img" alt="" referrerpolicy="no-referrer" height="200" width="auto">
+                </div>
+                <div class="col topic">
+                    <div>
+                        名前：<%= user.username %> (<%= review.length %>件のコメント)<br>
+                        <%= user.class %>学生<br>
+                        メール：<%= user.email %><br>
+                    </div>
+                </div> 
+                
+                <div class="col topic">
+                    <div class="stars">評価：<%for (var i=0; i < star; i++) {%> ★ <%}%></div>
+                    <div class="">直近：
+                        <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><%= review.length %>件のコメント</button>
+                    </div>
+                    <a href="/chat<%=user.username%>" class="btn btn-primary chat">チャット</a>
+                </div>
+            </div>
+
+            <hr class="hr1">
+
+            <h2 class="mb-4 mt-5 text-center">販売中の参考書</h2>
+
+            <%for (const onebook of book) {%>
+                <div class="row">
+                    <div class="col">
+                        <img src="<%= onebook.picture%>" class="books" alt="" referrerpolicy="no-referrer"></img>
+                    </div>
+                    <div class="col-10 detail">
+                        <p class="bookname"><%= onebook.unique_id %>.<%= onebook.bookname %></p>
+                        <p class="seller">売者： <%= onebook.owner %></p>
+                        <p class="price"><%= onebook.price %>円</p>
+                    </div>
+                </div>
+                <hr>
+            <% }%>
+
+            <h2 class="mb-4 mt-4 text-center">口コミ履歴</h2>
+
+            <%for (const oneinfo of info) {%>
+                    <a href="/onepost<%= oneinfo.unique_id %>">
+                        <div class="row comment_area">
+                            <div class="col-9">
+                                <%= oneinfo.unique_id %>.<%= oneinfo.topic %>
+                            </div>
+                            <div class="col-1">
+                                作者：<%= oneinfo.writer %>
+                            </div>
+                            <div class="col">
+                                <%= oneinfo.date %><br>
+                            </div>
+                        </div>
+                    </a>
+            <% }%>
+        </div>
+    </section>
+
+    
+    
+    
+    
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasRightLabel">コメント</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <%for (const onereview of review) {%>
+            <div class="commenter">
+                <p class="buyer">購入者：<%= onereview.writer %></p>
+                <p class="comment"><%= onereview.review %></p>
+                <p class="time"><%= onereview.date %></p>
+            </div>
+        <% }%>
+    </div>
+  </div>
+
+
+
+<%- include('partials/footer'); %>  

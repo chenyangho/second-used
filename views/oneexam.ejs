@@ -1,0 +1,168 @@
+
+<%- include('partials/header', {css_file: 'oneexam'}); %>  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <br>
+
+    <section class="info-show">
+        <div class="container">
+            <div class="row">
+                <h2 id="topic">
+                    <%= oneexam.name %>
+                </h2>
+                <br>
+                <div class="col-8">
+                    <h4 class="review">
+                        試験内容<br>
+                        <%=oneexam.info%><br>
+                    </h4>
+
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="review">
+                                試験時間：<%=oneexam.length%>分<br>
+                                試験方式：<%= oneexam.exam_way %><br>
+                                合格率：<%= oneexam.pass_percent %>%<br>
+                            </h4>
+                        </div>
+                    
+                        <div class="col">
+                            <h4 class="review">
+
+                                <!-- <img src="<%= oneexam.picture%>" alt=""></img><br> -->
+
+                                受験料：<%= oneexam.price %>円<br>
+                                難易度：<%= oneexam.difficulty %><br>
+                                合格率：<%= oneexam.pass_rate %><br>
+                                必要な時間：<%= oneexam.time_need%><br>
+                                コスパ：<%= oneexam.return_rate %><br>
+                                値段: <%= oneexam.valuable%>
+                                
+                            </h4>
+                         </div>
+                    </div>
+                    <hr>
+                    <div class="under_area1">
+                        <h4 class="under_title">受験感想：</h4>
+                        <%for (const oneinfo of infos) { %>
+                            <h4 class="links">
+                                <a href="/onepost<%= oneinfo.unique_id %>">
+                                    <%= oneinfo.topic %>
+                                    投稿者：<%= oneinfo.writer %>
+                                    <%= oneinfo.date %>
+                                </a>
+                            </h4>
+                        <% } %>
+                    </div>
+
+
+                    <div class="under_area2">
+                        <h4 class="under_title">関連の本：</h4>
+                        <%for (const onebook of books) { %>
+                            <h4 class="books">
+                                <%= onebook.bookname %>
+                                投稿者：<%= onebook.owner %>
+                                値段：<%= onebook.price%>円
+                            </h4>
+                        <% } %>
+                    </div>
+                </div>
+                
+                <div class="col canv_area">
+                    <div class="canvas-container shape">
+                        <canvas id="<%= oneexam.unique_id%>" style="width: 400px; height: 400px;"></canvas>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        var ctx = document.getElementById('<%= oneexam.unique_id%>');
+        var data = {
+            labels: [
+                '難易度',
+                '合格率',
+                '必要な時間',
+                'コスパ',
+                '値段'
+            ],
+            datasets: [
+                {
+                    label: '<%= oneexam.name %>',
+                    data: ["<%= oneexam.difficulty%>", "<%= oneexam.pass_rate%>", "<%= oneexam.time_need%>", "<%= oneexam.return_rate%>", "<%= oneexam.valuable%>"],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 34, 132,0.75)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)',
+
+                },
+                {
+                    label: '',
+                    data: [0, 0, 0, 0, 5],
+                    fill: true,
+                    backgroundColor: 'rgba(54, 162, 235, 0)',
+                    borderColor: 'rgb(54, 162, 235,0)',
+                    pointBackgroundColor: 'rgb(54, 162, 235,0)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235,0)',
+
+                }
+            ]
+        };
+        // </block:setup>
+
+        // <block:config:0>
+        var config = {
+            type: 'radar',
+            data: data,
+            options: {
+
+                plugins: {  // 'legend' now within object 'plugins {}'
+                    legend: {
+                        labels: {
+                            color: "white",  // not 'fontColor:' anymore
+                            // fontSize: 18  // not 'fontSize:' anymore
+                            font: {
+                                color: "white",
+                                size: 20 // 'size' now within object 'font {}'
+                            },
+                        },
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: true,
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                },
+                scales: {
+                    r: {
+                        pointLabels: {
+                            color: 'white',
+                            font: 1
+
+                        }
+                    }
+
+                }
+            },
+        };
+        // </block:config>
+
+
+        var chart_<%= oneexam.unique_id %> = new Chart(
+            ctx,
+            config
+        );
+    </script>
+
+
+
+<%- include('partials/footer'); %>  

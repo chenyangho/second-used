@@ -1,0 +1,99 @@
+
+<%- include('partials/header', {css_file: 'chat'}); %>  
+	
+
+	  
+	<br>
+	<section class="mb-5">
+		<div class="container">
+			<div id="topic">
+				<%=user2_data.username%>のDM
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-5 left">
+					<%for (const one_chat_data of chat_data) {%>
+						<% var new_name = one_chat_data.username1 %>
+						<div class="msg_area mb-4">
+						<% if (one_chat_data.username1 != user2_data.username) { %>
+							<div class="who" id='sender'>
+								<span style='float: right;'><%= one_chat_data.username1 %> :</span>
+							</div>
+							<div class="message">	
+								<span style='float: right;'><%= one_chat_data.content %></span>
+							</div>
+							<div class="date">
+								<span style='float: right;'>( <%= one_chat_data.date %> )</span>
+							</div>
+						<% } else { %>
+							<div class="who" id='sender'>
+								<span><%= one_chat_data.username1 %> :</span>
+							</div>
+							<div class="message">	
+								<span><%= one_chat_data.content %></span>
+							</div>
+							<div class="date">
+								<span>( <%= one_chat_data.date %> )</span>
+							</div>
+						<% } %>
+						</div>
+						<% var old_name = new_name %>
+					<% }%>
+				</div>
+				<div class="col right">
+					<div class="info-form">
+						<form id="form" method="post">
+							<!-- <input type="text" name="content" placeholder="MESSAGE" required="" class="form-control"><br /> -->
+							<label class="form-label mb-3">メッセージ</label>
+							<textarea type="text" name="content" placeholder="" class="form-control ta"></textarea><br />
+							<input type="hidden" name="username2" placeholder="username2" value="<%=user2_data.unique_id%>"
+								required="" class="form-control"><br />
+							<input type="submit" value="送信" class="btn btn-danger btn-lg send">
+						</form>
+					</div>
+					<div class="mssg">
+						<span id="check"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="LangTable"><a href="./chat.ejs" id="aa"></a></div>
+	</section>
+
+	
+<%- include('partials/footer'); %>  
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$("#form").submit(function (event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/chat',
+					data: $('#form').serialize(),
+					dataType: "json",
+					success: function (response) {
+						//alert("a");
+						//console.log(response.Success);
+						$('#form')[0].reset();
+
+						document.getElementById("check").innerHTML = response.Success;
+						//ADD THIS CODE
+						setTimeout(function () {
+							document.getElementById("check").innerHTML = "";
+						}, 3000);
+						if (response.Success == "Posted") {
+							// document.getElementById("aa").click();
+							document.body.scrollTop = document.documentElement.scrollTop = 0;
+							location.reload();
+						};
+					},
+					error: function () {
+					}
+				})
+			});
+
+		});
+	</script>

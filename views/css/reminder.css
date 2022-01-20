@@ -1,0 +1,31 @@
+
+#topic{
+  text-align: center;
+  margin-top: 50px;
+  font-size: 40px;
+  margin-bottom: 25px;
+}
+
+.tag{
+  margin-bottom: 20px;
+}
+
+.review{
+    position: relative;
+    display: flex;
+    height: 60px;
+}
+
+.in_rev{
+    margin-right: 10px;
+}
+
+.date{
+    font-size: larger;
+    padding-top: 6px;
+}
+
+.btn{
+    height: 40px;
+}
+

@@ -1,0 +1,111 @@
+<%- include('partials/header', {css_file: 'info'}); %>  
+
+	  
+	  <br>
+	  
+	  <section class="info-show">
+		<div class="container">
+		  <div class="row">
+			<h1 id="topic">投稿</h1>
+			<br>
+			<div class="info-form">
+			  <form id="form" method="post">
+			  <div class='input_area'>
+			  <div class="col-6 left">
+				<label class="form-label">試験</label>
+				<select name="select" class="form-select class_select">
+				  <option value="1">IT Passport</option>
+				  <option value="2">基本情報技術者試験</option>
+				  <option value="3">応用情報技術者試験</option>
+				  <option value="4">情報セキュリティスペシャリスト</option>
+				  <option value="5">システムアーキテクト</option>
+				  <option value="6">AWS認定資格</option>
+				  <option value="7">オラクルJava認定資格</option>
+				  <option value="8">シスコ技術者認定資格</option>
+				  <option value="9">マイクロソフト認定資格</option>
+				</select><br />
+	  
+				<label class="form-label">タイトル</label>
+				<input type="text" name="topic" placeholder="タイトル" required="" class="form-control"><br />
+	  
+				<label class="form-label">試験の得点</label>
+				<input type="number" name="points" placeholder="試験の得点" required="" class="form-control"><br />
+	  
+				<label class="form-label">試験の回数</label>
+				<input type="number" name="exam_count" placeholder="試験の回数" class="form-control"><br />
+	  
+				<label class="form-label">学習の期間</label>
+				<input type="text" name="study_period" placeholder="学習の期間" class="form-control"><br />
+	  
+				<label class="form-label">使用したテキスト</label>
+				<input type="text" name="used_book" placeholder="使用したテキスト" required="" class="form-control"><br />
+				</div>
+				
+				
+			  <div class="col-6 right">
+	  
+				<label class="form-label">勉強方式</label>
+				<input type="text" name="study_style" placeholder="勉強方式" class="form-control"><br />
+	  
+				<label class="form-label">次の目標</label>
+				<input type="text" name="next_target" placeholder="次の目標" class="form-control"><br />
+	  
+				<label class="form-label">試験の感想</label>
+				<textarea type="text" name="review" placeholder="試験の感想" required="" class="form-control ta"></textarea><br />
+	  
+				<label class="form-label">アドバイス</label>
+				<textarea type="text" name="advice" placeholder="アドバイス" class="form-control ta"></textarea><br />
+				</div>
+				</div>
+	  
+				<input type="submit" value="アプロード" class="btn btn-lg mt-5 upload">
+			  </form>
+			</div>
+			<div class="mssg bg-danger">
+			  <span id="check"></span>
+			</div>
+			<div id="LangTable"><a href="/info" id="aa"></a>
+			</div>
+			<!-- <%for (const oneinfo of info) {%>
+			  <h4 id="review"><a href="/onepost<%= oneinfo.unique_id %>">　<%= oneinfo.exam_name %>合格体験：<%= oneinfo.topic %> 日時： <%= oneinfo.date %> 投稿者：<%= oneinfo.writer %></a></h4>
+			  <% }%> -->
+	  
+		  </div>
+		</div>
+	</section>
+
+	<%- include('partials/footer'); %>  
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form" ).submit(function(event) {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/info',
+					data: $('#form').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form')[0].reset();
+
+						document.getElementById("check").innerHTML=response.Success;
+         					//ADD THIS CODE
+         					setTimeout(function(){
+         						document.getElementById("check").innerHTML="";
+         					},3000);
+         					if (response.Success=="Posted") {
+         						document.getElementById("aa").click();
+         					};
+         				},
+         				error: function() {
+         				}
+         			})
+			});
+
+		});
+	</script>
+	  
